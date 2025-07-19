@@ -1,0 +1,100 @@
+What is Js?
+
+Js is a high-level prototype-based object-oriented multi-paradigm interpreted or just in-time compiled dynamic single-threaded grarbage-collected programming language with first class functions and a non-blocking event-loop concurrency model..
+
+1. High-level
+2. Garbage-collected [cleaning the memory so we dont't have to]
+3. Interpreted or just-in-time compiled
+4. Multi-paradigm [An approach and mindset of structuring code, which will direct your coding style and technique]
+   a) Procdural programming
+   b) Object-oriented programming
+   c) Funcational programming
+   5)Prototype-based-object-orientd [almost everything in JS is an object except for primitive values (array are just objects )]
+   6)First-class functions [functions are simply treated as variables we can pass them into other functions and return them from functions]
+   7)Dynamic
+
+8)Single-threaded [Concurrency model: how the JS engine handles multiple tasks happening at the same time]
+[ JS runs in one single thread so it can only do one thing at a time ]
+
+      //So what about a long-running task?
+
+      [By using an event-loop takes long running tasks, executes them in the background and puts them back in the main thread once they are finished]
+
+9. Non-blocking event-loop
+
+// What is JS engine
+
+Any JS engine contains a (callstack) and a (heap)
+(Callstack) is where our code is executed using the (Execution context)
+(Heap) is an unstructured memory pool which stores all the objects that our application needs
+
+// How the code is compiled to machine code?
+a)first step is parsing the code(means reading the code) during parsing process the code is parsed into a datastructure called AST
+b)Second step is Compilation which takes the AST and compiles it into a machine code
+c)This machine code then gets executed right away (execution happens in callStack)
+(Optimization)
+
+                                      JS runtime in the browser
+
+                                      JS Engine[Heap Call Stack]
+                                      WEB APIs [Dom Timers Fetch API .....]
+                                      CALLBACK QUEUE
+                                      EVENTLOOP
+
+                           //EXECUTION CONTEXT AND THE CALL STACK
+
+Creation of global execution context (for top-level code) [top-level code is a code that is not inside any functionn]
+
+Execution of top-level code (inside global EC)
+
+Execution of functions and waiting for callbacks
+
+      EXECUTION CONTEXT IN DETAIL
+
+What is inside execution context?
+
+1. variable environment [All variables and function declerations are stored (arguments objects)]
+2. Scope chain [ consists of refrences to variables that are located outside of the current fuction]
+3. this keyword
+   (These are all created during the creation phase right before execution)
+   (execution context belong to the arrow function does not get there own (arguments object and this keyword))
+
+CALL STACK
+Place where execution context get stacked on top of each other to keep track of where we are in the
+
+         SCOPE CHAIN
+     const myName = 'Shakir'
+
+     function first() {
+      const age  = 20;
+
+      if(age >= 30) {
+            const decade = 3
+            var millenial = true
+      }
+
+      function second() {
+            const job = 'Teacher'
+
+            consol.log(`${myName} is a ${age} old ${job}`)
+      }
+
+      second();
+     }
+     first()
+       //////////////////
+     Global Scope
+     [myName = 'Shakir'] //simple  // first the global scope is created
+
+     first() scope  // this gets acces to the variables of outer scope that is global scope & also created there own scope
+     [age = 20]
+     [millenial = true]
+     [myName = 'Shakir']
+
+     second() scope                      if Block scope
+     [job = 'Teacher']                  [decade = 3]
+     [age = 20]                         [age = 20]
+     [millenial = true]                 [millenial = true]
+     [myName ='Shakir']                 [myName = 'Shakir']
+
+       (one thing to remember is that it it one directional) & it is called the variable lookup in scope chain
