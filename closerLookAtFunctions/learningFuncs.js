@@ -95,3 +95,19 @@ greet("hello")(
 
 //CALL & APPLY  Method used to set the this keyword manually..
 // BIND Methods returns a new fun in which this keyword is bind to the object that is calling the function..
+
+// CLOSURES
+// Any function has access to the variable environment og the execution context in which the function was created
+const secureBooking = function () {
+  let passangerCount = 0;
+
+  return function () {
+    passangerCount++;
+    console.log(`${passangerCount} passangers`);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+// A closure gives a function access to all the variables of its parent function event after that parent function has returned the function keeps a reference to its outerscope which preserves the scope chain throughtout time
