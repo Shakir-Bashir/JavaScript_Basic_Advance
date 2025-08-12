@@ -65,3 +65,55 @@ const balance = movements.reduce(function (acc, cur, i, arr) {
 }, 0);
 
 console.log(balance);
+
+
+// Chaning methods
+const movements1 = [200, 450, -400, 3000, -650, -350, 70, 1300];
+/* what we did here is firstly we use the filter method and as we know filter returns the new array of elements that satisfy the specific condition and when it returns the new array and on that new array we applied the map method which also returns the new array and on that new returned array we applied the the reduc method by that we simply chain multiple methods on each other easily in one go... one point to remember is that after the (reduce) method we can not chain other methods because it returns the total sum not the new array so we can not  chain another method on that*/
+const eurToUsd1 = 1.1;
+const totalDepositsUSD  = movements1.filter(mov => mov > 0 ).map(mov => mov * eurToUsd1).reduce((acc, mov)=> acc + mov,0)
+console.log(totalDepositsUSD)
+
+// Find Method
+/* find method returns the first element based on the given condition in the cb fun we have given that return the movement that is less that zero it loops through the array one element after another and when it gets the first element less than zero it returns that element and stops looping*/
+const firstWithdrwal = movements1.find(mov => mov < 0);
+console.log(firstWithdrwal)
+
+// FindIndex Method (it returns the index of the element not the element)
+// FindLastIndex & FindLast it works like other methods 
+
+
+// some & every method
+
+/* it works same like the includes method but includes only checks for equality check but it checks based on some condition*/
+const anyDeposit = movements1.some(mov => mov > 1000)
+console.log(anyDeposit)
+
+// every only returns the true  if all the elements in the array satisfy the condition  that we pass in
+
+console.log(movements1.every(mov => mov > 0))
+/* here it returns false because all the movements  in the array are not greater than zero */
+
+
+// flat and flat map methods
+
+/*flat method is used  to flaten the nested arrays */
+const arr4= [1,2,3,[4,5],6]
+console.log(arr4.flat()) // we can also tell it how deep it should go  like 1 or  2  or more  according to our needs
+
+/* flat map combines the flat and map method but it only goes one level deep so if we need to get more deeper we need to use flat to set how deep we need to go..*/
+
+// sorting arrays
+// sort method
+/* sort method works based on string so to make it work properly we we pass the cb fun to the sort method the cb fun accept 2 arguments & if we return less than zero then the value a will be sorted before value b  and the opposite if we return a positive value then b will be placed before a in the sorted output array*/
+
+//return < 0 a, b
+//return > 0 b, a
+
+movements1.sort((a,b) => {
+  if(a > b)
+    return 1;
+  if(b > a)
+    return -1;
+})
+console.log(movements1) //sort method mutates the original array
