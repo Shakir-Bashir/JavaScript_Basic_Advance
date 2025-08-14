@@ -147,3 +147,70 @@ Student.prototype.introduce = function() {
 
 const mike = new Student ("Mike", 2004, 'Computer Science')
 mike.introduce()
+
+//Inheritence between  classes. Object.Create
+const PersonProto1 = {
+    calcAge() {
+        console.log(2037 - birthYear)
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+}
+
+const steven1 = Object.create(Person)
+// Here we set the studentProto also to the PersonProto1 now what it does it student inherits from the person
+const studentProto = Object.create(PersonProto1)
+const jay = Object.create(studentProto)
+
+
+// Classes 
+// Encapsulation
+  // 1. Public fields
+  // 2. Private fields
+  // 3. Public methods
+  // 4. Private methods
+
+class Account {
+    local = navigator.language;
+    bank ='Bankist';
+    #movement = []
+    #pin;
+
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.#pin = pin;
+        // this.movements = [];
+        // this.local = navigator.language;
+
+
+        console.log(`Thanks for opening an account ${owner}`)
+    }
+    #approveLoan(val) {
+        return true
+    }
+
+    requestLoan(val) {
+        if(this.#approveLoan(val)){
+            this.deposit(val)
+            console.log(`loan approved`)
+        }
+    }
+
+    deposit(val) {
+        this.#movement.push(val)
+    }
+
+    withdraw(val){
+        this.deposit(-val)
+    }
+}
+
+const acc1 = new Account ('shakir', 'INR', 1111)
+acc1.deposit(250)
+acc1.withdraw(200)
+
+console.log(acc1)
